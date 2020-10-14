@@ -32,24 +32,91 @@ namespace MathForGames
             _entities = appendedArray;
         }
 
+        public bool RemoveActor(int index)
+        {
+            if(index < 0 || index >= _entities.Length)
+            {
+                return false;
+            }
+
+            bool entityRemoved = false;
+
+            Entity[] newArray = new Entity[_entities.Length - 1];
+            int j = 0;
+            for(int i = 0; i < _entities.Length; i++)
+            {
+                if(i != index)
+                {
+                    newArray[j] = _entities[i];
+                    j++;
+                }
+                else
+                {
+                    entityRemoved = true;
+                }
+            }
+
+            _entities = newArray;
+            return entityRemoved;
+        }
+
+        public bool RemoveEntity(Entity entity)
+        {
+            if(entity == null)
+            {
+                return false;
+            }
+
+            bool entityRemoved = false;
+            Entity[] newArray = new Entity[_entities.Length - 1];
+            int j = 0;
+            for (int i = 0; i < _entities.Length; i++)
+            {
+                if (entity != _entities[i])
+                {
+                    newArray[j] = _entities[i];
+                    j++;
+                }
+                else
+                {
+                    entityRemoved = true;
+                }
+            }
+
+            _entities = newArray;
+            return entityRemoved;
+        }
+
         public void Start()
         {
-
+            for (int i = 0; i < _entities.Length; i++)
+            {
+                _entities[i].Start();
+            }
         }
 
         public void Update()
         {
-
+            for (int i = 0; i < _entities.Length; i++)
+            {
+                _entities[i].Update();
+            }
         }
 
         public void Draw()
         {
-
+            for (int i = 0; i < _entities.Length; i++)
+            {
+                _entities[i].Draw();
+            }
         }
 
         public void End()
         {
-
+            for (int i = 0; i < _entities.Length; i++)
+            {
+                _entities[i].End();
+            }
         }
     }
 }
